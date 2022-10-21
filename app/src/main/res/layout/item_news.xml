@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imageUrl="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="news"
+            type="com.e.mademvvm.mvvmnews.bean.NewBean.ResultBean.DataBean" />
+
+        <variable
+            name="itemClick"
+            type="com.e.mademvvm.mvvmnews.ui.home.ClickBinding"></variable>
+    </data>
+    <LinearLayout
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> itemClick.itemClick(news,tv)}"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="@{news.title}"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/darker_gray"
+            android:text="@{news.date}"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@{news.author_name}"
+            android:textColor="@color/darker_gray"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/darker_gray" />
+
+        <com.e.mademvvm.mvvmnews.ui.view.DataImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="240dp"
+            android:maxHeight="120dp" />
+
+
+    </LinearLayout>
+
+
+
+
+</layout>

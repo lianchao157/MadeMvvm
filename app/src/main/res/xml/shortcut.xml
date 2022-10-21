@@ -1,0 +1,16 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+ <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher"
+        android:shortcutId="first"
+        android:shortcutLongLabel="@string/login"
+        android:shortcutShortLabel="@string/login">
+        <!-- targetClass 指定了点击该项菜单后要打开那个活动页面-->
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.e.createmcvp"
+            android:targetClass="com.e.createmcvp.TesetActivity" />
+        <categories android:name="android.shortcut.conversation" />
+
+    </shortcut>
+</shortcuts>
