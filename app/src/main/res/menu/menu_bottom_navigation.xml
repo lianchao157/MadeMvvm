@@ -10,5 +10,8 @@
         android:icon="@drawable/min"
         android:title="@string/title_mine" />
 
-
+    <item
+        android:id="@+id/yuliu"
+        android:icon="@drawable/min"
+        android:title="@string/title_mine" />
 </menu>

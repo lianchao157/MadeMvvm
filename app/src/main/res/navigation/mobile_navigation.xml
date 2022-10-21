@@ -9,7 +9,13 @@
         android:name="com.e.mademvvm.mvvmnews.ui.home.HomeFragmet"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/yuliu"
+        android:name="com.e.mademvvm.mvvmnews.ui.setting.SettingFragment"
+        android:label="@string/yuliu"
+        tools:layout="@layout/fragment_setting" />
 
+    />
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.e.mademvvm.mvvmnews.ui.dashboard.DashboardFragment"
@@ -17,6 +23,7 @@
         tools:layout="@layout/fragment_dashboard" />
 
     />
+
 
 </navigation>
 
