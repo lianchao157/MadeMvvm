@@ -9,7 +9,7 @@ import com.e.mademvvm.databinding.ActivityLoginBinding;
 import com.e.mademvvm.mvvmnews.ui.login.LoginViewModel;
 
 /***
- *运用 mvvm 写代码
+ *运用 mvvm 写代码测试
  */
 public class AboutActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
