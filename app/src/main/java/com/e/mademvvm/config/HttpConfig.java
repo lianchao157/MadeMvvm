@@ -17,4 +17,11 @@ public  class HttpConfig {
      * 聚合数据API
      */
     public static final String BASE_API = "http://v.juhe.cn/";
+
+
+//    多url 使用
+    public static String baseUrl = "https://192.168.1.1/";
+
+    public static String sfbaseUrl = "http://192.168.1.2/";
+
 }

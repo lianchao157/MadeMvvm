@@ -47,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 }
 
+//                AppCompatDelegate有四种模式可以设置:
+//
+//MODE_NIGHT_YES:直接指定夜间模式
+//
+//MODE_NIGHT_NO：直接指定日间模式
+//
+//MODE_NIGHT_FOLLOW_SYSTEM:根据系统设置决定是否设置夜间模式
+//
+//MODE_NIGHT_AUTO:根据当前时间自动切换模式
             }
         });
     }

@@ -3,6 +3,15 @@ package com.e.mademvvm;
 import android.app.Application;
 import android.content.Context;
 
+import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
+
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.APP_DOUBAN_DOMAIN;
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.APP_GANK_DOMAIN;
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.APP_GITHUB_DOMAIN;
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.DOUBAN_DOMAIN_NAME;
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.GANK_DOMAIN_NAME;
+import static com.e.mademvvm.mvvmnews.manybaseurl.Api.GITHUB_DOMAIN_NAME;
+
 
 /**
  * TODO tip 1：需要为项目准备一个 Application 来继承 BaseApplication，
@@ -25,6 +34,12 @@ public  class BaseApplication extends Application {
         context = getApplicationContext();
 //        Utils.init(this);
 //        PlayerManager.getInstance().init(this);
+
+        RetrofitUrlManager.getInstance().setDebug(true);
+        //将每个 BaseUrl 进行初始化,运行时可以随时改变 DOMAIN_NAME 对应的值,从而达到切换 BaseUrl 的效果
+        RetrofitUrlManager.getInstance().putDomain(GITHUB_DOMAIN_NAME, APP_GITHUB_DOMAIN);
+        RetrofitUrlManager.getInstance().putDomain(GANK_DOMAIN_NAME, APP_GANK_DOMAIN);
+        RetrofitUrlManager.getInstance().putDomain(DOUBAN_DOMAIN_NAME, APP_DOUBAN_DOMAIN);
     }
 
     public static Context getContext() {
