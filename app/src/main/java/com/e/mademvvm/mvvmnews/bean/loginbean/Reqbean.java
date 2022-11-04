@@ -6,20 +6,28 @@ package com.e.mademvvm.mvvmnews.bean.loginbean;
         * @desc 请求数据实体
         */
 public class Reqbean {
-    private String userName;
+    private int code;
 
-    private String userPass;
+    private String msg;
 
-    public Reqbean(String userName, String userPass) {
-        this.userName = userName;
-        this.userPass = userPass;
+    private Data data;
+
+    public void setCode(int code){
+        this.code = code;
     }
-
-    public String getUserName() {
-        return userName;
+    public int getCode(){
+        return this.code;
     }
-
-    public String getUserPass() {
-        return userPass;
+    public void setMsg(String msg){
+        this.msg = msg;
+    }
+    public String getMsg(){
+        return this.msg;
+    }
+    public void setData(Data data){
+        this.data = data;
+    }
+    public Data getData(){
+        return this.data;
     }
 }
