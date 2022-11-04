@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.e.mademvvm.BaseApplication;
 import com.e.mademvvm.mvvmnews.http.apiservice.BaseUrlInterceptor;
+import com.e.mademvvm.utils.NetworkUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
+import static com.e.mademvvm.BaseApplication.context;
 /***
  * 多base  url
  */
@@ -29,37 +31,66 @@ public
 class RetorfitServiceBuilderBYBaseURl {
     //设置缓存目录
     //拦截器
-//    RewriteCacheControlInterceptor mRewriteCacheControlInterceptor = new
-//            RewriteCacheControlInterceptor();
-//    File cacheFile = new File(BaseApplication.getContext().getCacheDir(), "cache");
-//    Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
-//    OkHttpClient client = new OkHttpClient.Builder()
-//            .readTimeout(60, TimeUnit.MILLISECONDS)
-//            .connectTimeout(60, TimeUnit.MILLISECONDS)
-//            .addInterceptor(mRewriteCacheControlInterceptor1)//没网的情况下
-//            .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
-//            .addInterceptor(new BaseUrlInterceptor())
-//            .addInterceptor(logInterceptor)
-//            .cache(cache)
-//            .build();
-//
-//
-//    //配置拦截器
-//    Interceptor mRewriteCacheControlInterceptor1 = new Interceptor() {
-//        @Override
-//        public Response intercept(Chain chain) throws IOException {
-//            Request request = chain.request();
-//            Response originalResponse = chain.proceed(request);
-//            int maxAge = 1 * 60; // 在线缓存在1分钟内可读取 单位:秒
-//            return originalResponse.newBuilder()
-//                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
-//                    .removeHeader("Cache-Control")
-//                    .header("Cache-Control", "public, max-age=" + maxAge)
-//                    .build();
-//        }
-//    };
-//    原文链接：https://blog.csdn.net/u010429311/article/details/59116706/
+    File cacheFile = new File(BaseApplication.getContext().getCacheDir(), "cache");
+    Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
+    OkHttpClient client = new OkHttpClient.Builder()
+            .readTimeout(60, TimeUnit.MILLISECONDS)
+            .connectTimeout(60, TimeUnit.MILLISECONDS)
+            .addInterceptor(mRewriteCacheControlInterceptor)//没网的情况下
+            .addNetworkInterceptor(mRewriteCacheControlInterceptor)//有网的情况下
+            .addInterceptor(new BaseUrlInterceptor())
+            .addInterceptor(getHttpLoggingInterceptor())
+            .cache(cache)
+            .build();
+    /***
+     *
+     * https://zhuanlan.zhihu.com/p/30168137
+     * 日志拦截器
+     */
+    public static HttpLoggingInterceptor getHttpLoggingInterceptor() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(
+                new HttpLoggingInterceptor.Logger() {
 
+                    @Override
+                    public void log(String message) {
+                        Log.e("OkHttp", "log = " + message);
+                    }
+
+                });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return loggingInterceptor;
+    }
+
+
+
+    Interceptor rewriteCacheControlInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response originalResponse = chain.proceed(request);
+            int maxAge = 1 * 60; // 在线缓存在1分钟内可读取 单位:秒
+            return originalResponse.newBuilder()
+                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                    .removeHeader("Cache-Control")
+                    .header("Cache-Control", "public, max-age=" + maxAge)
+                    .build();
+        }
+    };
+
+//    //配置拦截器
+    Interceptor mRewriteCacheControlInterceptor1 = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response originalResponse = chain.proceed(request);
+            int maxAge = 1 * 60; // 在线缓存在1分钟内可读取 单位:秒
+            return originalResponse.newBuilder()
+                    .removeHeader("Pragma")// 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
+                    .removeHeader("Cache-Control")
+                    .header("Cache-Control", "public, max-age=" + maxAge)
+                    .build();
+        }
+    };
 
 
 
@@ -144,31 +175,33 @@ class RetorfitServiceBuilderBYBaseURl {
 //                    .addInterceptor(mLoggingInterceptor).build();
 //            return okHttpClient;
 //    }
-//    private static final Interceptor mRewriteCacheControlInterceptor = new Interceptor() {
-//        @Override
-//        public Response intercept(Chain chain) throws IOException {
-//            Request request = chain.request();
-//            if (!NetUtil.isNetworkAvailable()) {
-//                request = request.newBuilder()
-//                        .cacheControl(CacheControl.FORCE_CACHE)
-//                        .build();
-//            }
-//            Response originalResponse = chain.proceed(request);
-//            if (NetUtil.isNetworkAvailable()) {
-//                //有网的时候读接口上的@Headers里的配置，可以在这里进行统一的设置
-//                String cacheControl = request.cacheControl().toString();
-//                return originalResponse.newBuilder()
-//                        .header("Cache-Control", cacheControl)
-//                        .removeHeader("Pragma")
-//                        .build();
-//            } else {
-//                return originalResponse.newBuilder()
-//                        .header("Cache-Control", "public, only-if-cached, max-stale=" + CACHE_STALE_SEC)
-//                        .removeHeader("Pragma")
-//                        .build();
-//            }
-//        }
-//    };
+private static final long CACHE_STALE_SEC = 60 * 60 * 24 * 4;
+
+    private static final Interceptor mRewriteCacheControlInterceptor = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            if (!NetworkUtil.isNetworkAvailable(context)) {
+                request = request.newBuilder()
+                        .cacheControl(CacheControl.FORCE_CACHE)
+                        .build();
+            }
+            Response originalResponse = chain.proceed(request);
+            if (NetworkUtil.isNetworkAvailable(context)) {
+                //有网的时候读接口上的@Headers里的配置，可以在这里进行统一的设置
+                String cacheControl = request.cacheControl().toString();
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", cacheControl)
+                        .removeHeader("Pragma")
+                        .build();
+            } else {
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + CACHE_STALE_SEC)
+                        .removeHeader("Pragma")
+                        .build();
+            }
+        }
+    };
 //    private static final Interceptor mLoggingInterceptor = new Interceptor() {
 //        @Override
 //        public Response intercept(Chain chain) throws IOException {

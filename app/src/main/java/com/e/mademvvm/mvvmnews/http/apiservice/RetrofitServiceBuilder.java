@@ -32,6 +32,7 @@ public  class RetrofitServiceBuilder {
             public void log(String message) {
 
                 System.out.println("信息"+message);
+                System.out.println("信息!!!!!!!!"+message);
             }
         });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -49,7 +50,9 @@ public  class RetrofitServiceBuilder {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpConfig.BASE_API)
+
+//                .baseUrl(HttpConfig.BASE_API)
+                .baseUrl(HttpConfig.BASE_APIBYmySelef)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
