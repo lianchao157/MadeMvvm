@@ -81,7 +81,7 @@ public class ManeActivity extends AppCompatActivity {
                 if (httpUrl == null || !httpUrl.toString().equals(mUrl1.getText().toString())) { //可以在 App 运行时随意切换某个接口的 BaseUrl
                     RetrofitUrlManager.getInstance().putDomain(GITHUB_DOMAIN_NAME, mUrl1.getText().toString());
                 }
-                NetWorkManager
+                 NetWorkManager
                         .getInstance()
                         .getOneApiService()
                         .getUsers(1, 10)

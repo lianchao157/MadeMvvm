@@ -1,6 +1,8 @@
 package com.e.mademvvm.mvvmnews.ui.login;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +13,15 @@ import com.e.mademvvm.config.HttpConfig;
 import com.e.mademvvm.databinding.ActivityLoginBinding;
 import com.e.mademvvm.mvvmnews.MainActivity;
 import com.e.mademvvm.mvvmnews.bean.BaseReqData;
+import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
+import com.e.mademvvm.mvvmnews.ui.ReginActivity;
+import com.e.mademvvm.utils.SharePreUril;
 
+import java.util.Map;
+import java.util.Set;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 //import androidx.lifecycle.ViewModelProvider;
@@ -30,14 +39,21 @@ import androidx.lifecycle.ViewModelProvider;
  * 主页登陆可以使用
  */
 public class LoginActivity extends AppCompatActivity {
+    private SharePreUril sharePreUril;
+
     // 声明对象
     private LoginViewModel loginViewModel;
     ActivityLoginBinding activityLoginActiviityBinding;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context=LoginActivity.this;
+//        sp = getSharedPreferences("sp_demo", Context.MODE_PRIVATE);
+        context = LoginActivity.this;
+        sharePreUril = new SharePreUril(context);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         activityLoginActiviityBinding
@@ -48,24 +64,72 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginActiviityBinding.btnLongin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginViewModel.login(getUserName(), getUserPass());
+                if (getUserName().equals("")) {
+                    showToast("账号不能为空");
+                } else if (getUserPass().equals("")) {
+                    showToast("不能为空");
+                } else {
+                    loginViewModel.login(getUserName(), getUserPass());
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+                }
+
             }
         });
 
-        loginViewModel.loginLiveData.observe(this, new Observer<BaseReqData<UserBean>>() {
+        loginViewModel.loginLiveData.observe(this, new Observer<Reqbean>() {
             @Override
-            public void onChanged(BaseReqData<UserBean> userBeanBaseReqData) {
-                if (userBeanBaseReqData.getStatue().equals(HttpConfig.REQUEST_OK)) {
-                    showToast(userBeanBaseReqData.getMsg());
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+            public void onChanged(Reqbean reqbean) {
+                System.out.println("成功：" + reqbean.getCode());
+                if (reqbean.getCode() == 0) {
+                    if (!reqbean.getData().getToken().equals("")) {
+                        sharePreUril.putRefreshToken(reqbean.getData().getToken());
+                        showToast("成功");
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+
                 } else {
-                    showToast(userBeanBaseReqData.getMsg());
+                    showToast("失败" + reqbean.getMsg());
                 }
             }
+
+//            @Override
+//            public void onChanged(UserBean userBeanBaseReqData) {
+//                System.out.println("!!!!!!!!!!!!!"+userBeanBaseReqData);
+//                if (null !=userBeanBaseReqData.getUsername()) {
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+//                    showToast("失败");
+//                }
+//
+//            }
+
         });
+//        注册操作
+        activityLoginActiviityBinding.btnRegin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ReginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+//        loginViewModel.reginLiveData.observe(this, new Observer<UserBean>() {
+//            @Override
+//            public void onChanged(UserBean userBean) {
+////                这里应该用返回码进行判断
+//                if(null==userBean){
+//                    showToast("注册失败了");
+//                }
+//            }
+//        });
     }
+
+
 
     /**
      * toast 提示

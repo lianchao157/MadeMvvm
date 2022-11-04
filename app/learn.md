@@ -282,3 +282,16 @@ builder 初始化和set方法
   
   
   2platform  总线  platform是一条虚拟总线。设备用platform_device表示，驱动用platform_driver进行注册
+  
+  面试的时用到的
+  https://zhuanlan.zhihu.com/p/527728608
+  
+  
+  mvp 项目 
+  https://github.com/songbaba/RxJavaRetrofitOkhttpMvp-master/tree/master/app/src/main/java/com/example/gs/mvpdemo/base
+  
+  
+  
+  sql  查询的应用
+  https://blog.csdn.net/huzecom/article/details/103254074?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-103254074-blog-121772040.pc_relevant_3mothn_strategy_and_data_recovery&spm=1001.2101.3001.4242.2&utm_relevant_index=4
+  

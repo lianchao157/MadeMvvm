@@ -23,5 +23,5 @@ public  class HttpConfig {
     public static String baseUrl = "https://192.168.1.1/";
 
     public static String sfbaseUrl = "http://192.168.1.2/";
-
+    public static final String BASE_APIBYmySelef = "http://192.168.43.33:8087";
 }

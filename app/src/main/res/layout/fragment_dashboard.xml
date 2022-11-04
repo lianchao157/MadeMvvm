@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.e.mademvvm.mvvmnews.ui.setting.SettingFragment">
 
     <TextView
@@ -15,4 +16,48 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="20sp" />
+    <RadioGroup
+        android:id="@+id/select_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rd_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="第一个"
+            />
+
+        <RadioButton
+            android:id="@+id/rd_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="第二个"
+            />
+
+        <RadioButton
+            android:id="@+id/rd_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="第三个"
+            />
+
+    </RadioGroup>
+     <FrameLayout
+        android:id="@+id/replace_2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      ></FrameLayout>
+
 </LinearLayout>

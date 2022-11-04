@@ -5,33 +5,96 @@ package com.e.mademvvm.repository;
 //import com.e.createmcvp.mvvmnews.bean.BaseReqData;
 //import com.e.createmcvp.mvvmnews.bean.loginbean.UserBean;
 
+import android.util.Log;
+
 import com.e.mademvvm.config.HttpConfig;
 import com.e.mademvvm.config.UserConfig;
 import com.e.mademvvm.mvvmnews.bean.BaseReqData;
+import com.e.mademvvm.mvvmnews.bean.NewBean;
+import com.e.mademvvm.mvvmnews.bean.loginbean.Data;
+import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
+import com.e.mademvvm.mvvmnews.http.apiservice.ApiServices;
+import com.e.mademvvm.mvvmnews.http.apiservice.BaseSubscriber;
+import com.e.mademvvm.mvvmnews.http.apiservice.RetrofitServiceBuilder;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class LoginRepository {
-
-    public static MutableLiveData<BaseReqData<UserBean>> login(String username, String password) {
-        BaseReqData baseReqData = new BaseReqData();
-        if (username.equals(UserConfig.USER_NAME) && password.equals(UserConfig.USER_PASS)) {
-            UserBean userBean = new UserBean();
-            userBean.setNickName(username);
-            userBean.setPassword(password);
-            baseReqData.setBody(userBean);
-            baseReqData.setMsg("登陆成工");
-            baseReqData.setStatue(HttpConfig.REQUEST_OK);
-
-        } else {
-            baseReqData.setMsg("用户名不正确");
-            baseReqData.setStatue(HttpConfig.REQUEST_FAILED);
+    private static final String TAG = "LoginRepository";
 
 
-        }  MutableLiveData<BaseReqData<UserBean>> mutableLiveData = new MutableLiveData<>();
-        mutableLiveData.setValue(baseReqData);
+    public static MutableLiveData<Reqbean> login(String username, String password) {
+        ApiServices apiServices = RetrofitServiceBuilder.createService(ApiServices.class);
+        final MutableLiveData<Reqbean> mutableLiveData = new MutableLiveData<>();
+        if (apiServices != null) {
+            apiServices.getlogin(username, password)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseSubscriber<Reqbean>() {
+                        @Override
+                        public void onNext(Reqbean reqbean) {
+                            Log.d(TAG, "onNext: 在这里"+reqbean.getCode());
+                            Log.d(TAG, "onNext: 在这里");
+                            mutableLiveData.setValue(reqbean);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+//                        @Override
+//                        public void onNext(Reqbean reqbean) {
+//                            mutableLiveData.setValue(reqbean);
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            Log.d(TAG, "onError: " + e.toString());
+//                        }
+//                        @Override
+//                        public void onNext(Reqbean reqbean) {
+//                            Log.d(TAG, "onNext: 在这里"+reqbean.getCode());
+//                            Log.d(TAG, "onNext: 在这里");
+//                            mutableLiveData.setValue(reqbean);
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//
+//                              mutableLiveData.setValue(reqbean);
+//                        }
+                    });
+        }
         return mutableLiveData;
+    }
 
+    public  static  MutableLiveData<UserBean> reginuser(String Userid,String password){
+        ApiServices apiServices = RetrofitServiceBuilder.createService(ApiServices.class);
+        final MutableLiveData<UserBean> mutableLiveData = new MutableLiveData<>();
+        if (apiServices != null) {
+            apiServices.regin(Userid, password)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseSubscriber<UserBean>() {
+                        @Override
+                        public void onNext(UserBean userBean) {
+                            Log.d(TAG, "onNext: 在这里");
+//                            Log.d(TAG, "onNext: 在这里"+userBean.getToken());
+                            mutableLiveData.setValue(userBean);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                            Log.d(TAG, "onError: " + e.toString());
+                        }
+                    });
+        }
+        return mutableLiveData;
     }
 }
+

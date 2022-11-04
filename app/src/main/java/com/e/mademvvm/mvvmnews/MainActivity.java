@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.e.mademvvm.R;
+import com.e.mademvvm.mvvmnews.ui.dashboard.DashboardFragment;
 import com.e.mademvvm.utils.DeviceUtil;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.rest,new DashboardFragment()).commit();
         BottomNavigationView   navigationView=findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration =new AppBarConfiguration.
                 Builder(R.id.navigation_dashboard).build();
