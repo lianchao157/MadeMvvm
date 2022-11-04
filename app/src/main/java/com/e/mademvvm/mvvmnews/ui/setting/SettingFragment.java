@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.e.mademvvm.R;
@@ -24,6 +25,14 @@ public   class SettingFragment  extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
         final TextView textView = root.findViewById(R.id.text_setting);
+        final WebView webView=root.findViewById(R.id.webView);
+        settingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+
+            }
+        });
         settingViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
