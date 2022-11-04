@@ -1,6 +1,5 @@
 package com.e.mademvvm.mvvmnews.bean;
-public
-class Bean {
+public  class Bean {
     public Bean(String getrusult) {
         this.getrusult = getrusult;
     }
