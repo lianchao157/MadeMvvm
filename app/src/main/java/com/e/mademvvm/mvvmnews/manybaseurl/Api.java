@@ -1,7 +1,10 @@
 package com.e.mademvvm.mvvmnews.manybaseurl;
 
-public
-interface Api {
+/***
+ * 网络请求的url
+ * ynchronized顾名思义，就是用来进行一些同步工作的，我们常常在多线程的环境中使用到它，实现互斥的效果。
+ */
+public  interface Api {
     String APP_DEFAULT_DOMAIN = "http://jessyan.me";
 
     String APP_GITHUB_DOMAIN = "https://api.github.com";
