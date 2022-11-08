@@ -44,29 +44,10 @@ public class LoginRepository {
 
                         @Override
                         public void onError(Throwable e) {
-
+                            Reqbean reqbean=new Reqbean();
+                            reqbean.setMsg(""+e.toString()+e.getMessage());
+                            mutableLiveData.setValue(reqbean);
                         }
-//                        @Override
-//                        public void onNext(Reqbean reqbean) {
-//                            mutableLiveData.setValue(reqbean);
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//                            Log.d(TAG, "onError: " + e.toString());
-//                        }
-//                        @Override
-//                        public void onNext(Reqbean reqbean) {
-//                            Log.d(TAG, "onNext: 在这里"+reqbean.getCode());
-//                            Log.d(TAG, "onNext: 在这里");
-//                            mutableLiveData.setValue(reqbean);
-//                        }
-//
-//                        @Override
-//                        public void onError(Throwable e) {
-//
-//                              mutableLiveData.setValue(reqbean);
-//                        }
                     });
         }
         return mutableLiveData;

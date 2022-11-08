@@ -11,6 +11,8 @@ import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
 import com.e.mademvvm.repository.LoginRepository;
 
+import java.util.List;
+
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,6 +23,41 @@ import androidx.lifecycle.ViewModel;
  * 登陆的view modlel
  */
 public class LoginViewModel extends ViewModel {
+
+    public List<Reqbean> getmList() {
+        return mList;
+    }
+
+    public void setmList(List<Reqbean> mList) {
+        this.mList = mList;
+    }
+
+    public Throwable getmThrowable() {
+        return mThrowable;
+    }
+
+    public void setmThrowable(Throwable mThrowable) {
+        this.mThrowable = mThrowable;
+    }
+
+    public MutableLiveData<UserBean> getReqbeanMutableLiveData() {
+        return reqbeanMutableLiveData;
+    }
+
+    public void setReqbeanMutableLiveData(MutableLiveData<UserBean> reqbeanMutableLiveData) {
+        this.reqbeanMutableLiveData = reqbeanMutableLiveData;
+    }
+
+    public LiveData<Reqbean> getLoginLiveData() {
+        return loginLiveData;
+    }
+
+    public void setLoginLiveData(LiveData<Reqbean> loginLiveData) {
+        this.loginLiveData = loginLiveData;
+    }
+
+    private List<Reqbean> mList;
+    private Throwable mThrowable;
 
     private MutableLiveData<UserBean> reqbeanMutableLiveData = new MutableLiveData<>();
     public LiveData<Reqbean> loginLiveData = Transformations.switchMap(reqbeanMutableLiveData,
@@ -40,7 +77,6 @@ public class LoginViewModel extends ViewModel {
         UserBean userBean=new UserBean();
         userBean.setUsertel(userPass);
         userBean.setUsername(userName);
-
         reqbeanMutableLiveData.setValue(userBean);
     }
 
