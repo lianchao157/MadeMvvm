@@ -53,29 +53,29 @@ public class LoginRepository {
         return mutableLiveData;
     }
 
-    public  static  MutableLiveData<UserBean> reginuser(String Userid,String password){
-        ApiServices apiServices = RetrofitServiceBuilder.createService(ApiServices.class);
-        final MutableLiveData<UserBean> mutableLiveData = new MutableLiveData<>();
-        if (apiServices != null) {
-            apiServices.regin(Userid, password)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseSubscriber<UserBean>() {
-                        @Override
-                        public void onNext(UserBean userBean) {
-                            Log.d(TAG, "onNext: 在这里");
-//                            Log.d(TAG, "onNext: 在这里"+userBean.getToken());
-                            mutableLiveData.setValue(userBean);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                            Log.d(TAG, "onError: " + e.toString());
-                        }
-                    });
-        }
-        return mutableLiveData;
-    }
+//    public  static  MutableLiveData<UserBean> reginuser(String Userid,String password){
+//        ApiServices apiServices = RetrofitServiceBuilder.createService(ApiServices.class);
+//        final MutableLiveData<UserBean> mutableLiveData = new MutableLiveData<>();
+//        if (apiServices != null) {
+//            apiServices.regin(Userid, password)
+//                    .subscribeOn(Schedulers.newThread())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new BaseSubscriber<UserBean>() {
+//                        @Override
+//                        public void onNext(UserBean userBean) {
+//                            Log.d(TAG, "onNext: 在这里");
+////                            Log.d(TAG, "onNext: 在这里"+userBean.getToken());
+//                            mutableLiveData.setValue(userBean);
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//
+//                            Log.d(TAG, "onError: " + e.toString());
+//                        }
+//                    });
+//        }
+//        return mutableLiveData;
+//    }
 }
 

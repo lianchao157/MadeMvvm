@@ -1,25 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mvvmnews.ui.ReginActivity">
+    tools:context=".mvvmnews.ui.regin.ReginActivity">
+
     <com.e.mademvvm.mvvmnews.ui.view.TitlebarView
-        android:id="@+id/title"
+        android:id="@+id/titletitlebar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/colorAccent"
-        app:centerTitle="自定义标题"
         app:centerTextColor="#FFF"
+        app:centerTitle="自定义标题"
         app:leftDrawble="@drawable/goback"
-        app:leftTextColor="#FFF"
         app:leftText="返回"
+        app:leftTextColor="#FFF"
         app:rightDrawable="@android:drawable/ic_btn_speak_now"
         app:rightText="语音"
-        app:rightTextColor="#FFF"
+        app:rightTextColor="#FFF" />
+
+    <scut.carson_ho.diy_view.SuperEditText
+        android:id="@+id/edsuper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="手机号"
+        app:cursor="@drawable/cursortest"
+        app:delete_height="80"
+        app:delete_width="80"
+        app:delete_x="0"
+        app:delete_y="0"
+
+        app:ic_delete="@drawable/delete"
+        app:ic_left_click="@drawable/ic_left_click"
+        app:ic_left_unclick="@drawable/ic_left_unclick"
+        app:left_height="60"
+        app:left_width="60"
+
+        app:left_x="0"
+        app:left_y="0"
+        app:lineColor_click="@color/black"
+        app:lineColor_unclick="@color/gray_text"
+        app:linePosition="1" />
+
+    <scut.carson_ho.diy_view.SuperEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="密码"
+        app:cursor="@drawable/cursortest"
+        app:delete_height="80"
+        app:delete_width="80"
+        app:delete_x="0"
+        app:delete_y="0"
+        app:ic_delete="@drawable/delete"
+
+        app:ic_left_click="@drawable/ic_left_click"
+        app:ic_left_unclick="@drawable/ic_left_unclick"
+        app:left_height="60"
+        app:left_width="60"
+        app:left_x="0"
+
+        app:left_y="0"
+        app:lineColor_click="@color/black"
+        app:lineColor_unclick="@color/gray_text"
+        app:linePosition="1"
+
         />
+
+    <scut.carson_ho.diy_view.SuperEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="确认密码"
+        app:cursor="@drawable/cursortest"
+        app:delete_height="80"
+        app:delete_width="80"
+        app:delete_x="0"
+        app:delete_y="0"
+        app:ic_delete="@drawable/delete"
+
+        app:ic_left_click="@drawable/ic_left_click"
+        app:ic_left_unclick="@drawable/ic_left_unclick"
+        app:left_height="60"
+        app:left_width="60"
+        app:left_x="0"
+
+        app:left_y="0"
+        app:lineColor_click="@color/black"
+        app:lineColor_unclick="@color/gray_text"
+        app:linePosition="1"
+
+        />
+
+    <Button
+        android:id="@+id/btnupdata"
+        android:layout_marginRight="@dimen/x9"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="20px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_btn_pressed"
+        android:text="注册完成"></Button>
 
 </LinearLayout>

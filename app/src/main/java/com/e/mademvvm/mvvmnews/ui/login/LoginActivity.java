@@ -2,26 +2,18 @@ package com.e.mademvvm.mvvmnews.ui.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.e.mademvvm.R;
-import com.e.mademvvm.config.HttpConfig;
 import com.e.mademvvm.databinding.ActivityLoginBinding;
 import com.e.mademvvm.mvvmnews.MainActivity;
-import com.e.mademvvm.mvvmnews.bean.BaseReqData;
 import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
-import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
-import com.e.mademvvm.mvvmnews.ui.ReginActivity;
+import com.e.mademvvm.mvvmnews.ui.regin.ReginActivity;
 import com.e.mademvvm.utils.SharePreUril;
 
-import java.util.Map;
-import java.util.Set;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 //import androidx.lifecycle.ViewModelProvider;
@@ -76,13 +68,27 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+        activityLoginActiviityBinding.botBarShopcar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("我是购物车");
+
+            }
+        });
+        activityLoginActiviityBinding.wxlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                 这里要做微信的授权的登陆
+            }
+        });
 
         loginViewModel.loginLiveData.observe(this, new Observer<Reqbean>() {
             @Override
             public void onChanged(Reqbean reqbean) {
-                System.out.println("成功：" + reqbean.getCode());
-                if (reqbean.getCode() == 0) {
-                    if (!reqbean.getData().getToken().equals("")) {
+                System.out.println("成功!!!getCode!!!：" + reqbean.getCode());
+                System.out.println("成功!!!!!!：" + reqbean.getCode());
+                if (0==(reqbean.getCode())) {
+                    if (null!=reqbean.getData()||!reqbean.getData().getToken().equals("")) {
                         sharePreUril.putRefreshToken(reqbean.getData().getToken());
                         showToast("成功");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -95,18 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
 
-//            @Override
-//            public void onChanged(UserBean userBeanBaseReqData) {
-//                System.out.println("!!!!!!!!!!!!!"+userBeanBaseReqData);
-//                if (null !=userBeanBaseReqData.getUsername()) {
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                } else {
-//                    showToast("失败");
-//                }
-//
-//            }
 
         });
 //        注册操作
