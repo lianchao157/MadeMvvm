@@ -62,8 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                     showToast("不能为空");
                 } else {
                     loginViewModel.login(getUserName(), getUserPass());
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
                 }
 
             }
@@ -88,12 +86,14 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println("成功!!!getCode!!!：" + reqbean.getCode());
                 System.out.println("成功!!!!!!：" + reqbean.getCode());
                 if (0==(reqbean.getCode())) {
-                    if (null!=reqbean.getData()||!reqbean.getData().getToken().equals("")) {
+                    if (null!=reqbean.getData()) {
                         sharePreUril.putRefreshToken(reqbean.getData().getToken());
                         showToast("成功");
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
 
+                    }else{
+                        showToast("失败" + reqbean.getMsg());
                     }
 
                 } else {

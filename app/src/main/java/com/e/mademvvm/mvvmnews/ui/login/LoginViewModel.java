@@ -1,12 +1,5 @@
 package com.e.mademvvm.mvvmnews.ui.login;
 
-//import com.e.createmcvp.mvvmnews.bean.BaseReqData;
-//import com.e.createmcvp.mvvmnews.bean.loginbean.Reqbean;
-//import com.e.createmcvp.mvvmnews.bean.loginbean.UserBean;
-//import com.e.createmcvp.repository.LoginRepository;
-
-import com.e.mademvvm.mvvmnews.bean.BaseReqData;
-import com.e.mademvvm.mvvmnews.bean.loginbean.Data;
 import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
 import com.e.mademvvm.repository.LoginRepository;
@@ -23,41 +16,6 @@ import androidx.lifecycle.ViewModel;
  * 登陆的view modlel
  */
 public class LoginViewModel extends ViewModel {
-
-    public List<Reqbean> getmList() {
-        return mList;
-    }
-
-    public void setmList(List<Reqbean> mList) {
-        this.mList = mList;
-    }
-
-    public Throwable getmThrowable() {
-        return mThrowable;
-    }
-
-    public void setmThrowable(Throwable mThrowable) {
-        this.mThrowable = mThrowable;
-    }
-
-    public MutableLiveData<UserBean> getReqbeanMutableLiveData() {
-        return reqbeanMutableLiveData;
-    }
-
-    public void setReqbeanMutableLiveData(MutableLiveData<UserBean> reqbeanMutableLiveData) {
-        this.reqbeanMutableLiveData = reqbeanMutableLiveData;
-    }
-
-    public LiveData<Reqbean> getLoginLiveData() {
-        return loginLiveData;
-    }
-
-    public void setLoginLiveData(LiveData<Reqbean> loginLiveData) {
-        this.loginLiveData = loginLiveData;
-    }
-
-    private List<Reqbean> mList;
-    private Throwable mThrowable;
 
     private MutableLiveData<UserBean> reqbeanMutableLiveData = new MutableLiveData<>();
     public LiveData<Reqbean> loginLiveData = Transformations.switchMap(reqbeanMutableLiveData,
@@ -81,27 +39,5 @@ public class LoginViewModel extends ViewModel {
     }
 
 
-    /***
-     * 注册方法
-     * @param userid
-     * @param userpassword
-     */
-    public void regin(String userid, String userpassword) {
-        {
-//            Reqbean reqbean = new Reqbean(userid, userpassword);
-//            reginreqbeanMutableLiveData.setValue(reqbean);
-        }
-
-    }
-
-//    private MutableLiveData<Reqbean> reginreqbeanMutableLiveData = new MutableLiveData<>();
-//    public LiveData<UserBean> reginLiveData = Transformations.switchMap(reqbeanMutableLiveData,
-//    new Function<Reqbean, LiveData<UserBean>>() {
-//        @Override
-//        public LiveData<UserBean> apply(Reqbean input) {
-//            return LoginRepository.reginuser(input.getUserName(), input.getUserPass());
-//        }
-//
-//    });
 
 }
