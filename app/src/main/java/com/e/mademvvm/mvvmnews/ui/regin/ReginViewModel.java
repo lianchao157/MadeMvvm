@@ -97,17 +97,14 @@ public class ReginViewModel extends ViewModel {
     }
 
     private MutableLiveData<User> reginreqbeanMutableLiveData1 = new MutableLiveData<>();
-    public LiveData<User> reginLiveData = Transformations.switchMap(reginreqbeanMutableLiveData1,
-    new Function<User, LiveData<User>>() {
+    public LiveData<ReginUser> reginLiveData = Transformations.switchMap(reginreqbeanMutableLiveData1,
+    new Function<User, LiveData<ReginUser>>() {
         @Override
-        public LiveData<User> apply(User input) {
-            return ReginUserRepository.reginuser(input.getUsernaem(),input.getPs(),"input.getPs()");
+        public LiveData<ReginUser> apply(User input) {
+            String  usernno=input.getUsernaem();
+            String   ps=input.getPs();
+            return  ReginUserRepository.reginuser(usernno,ps,"input.getPs()");
         }
-
-//        @Override
-//        public LiveData<UserBean> apply(User input) {
-//            return LoginRepository.reginuser(input.getUserName(), input.getUserPass());
-//        }
 
     });
 

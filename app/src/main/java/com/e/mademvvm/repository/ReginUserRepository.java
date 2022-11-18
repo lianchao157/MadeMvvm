@@ -1,9 +1,5 @@
 package com.e.mademvvm.repository;
 
-//import com.e.createmcvp.config.HttpConfig;
-//import com.e.createmcvp.config.UserConfig;
-//import com.e.createmcvp.mvvmnews.bean.BaseReqData;
-//import com.e.createmcvp.mvvmnews.bean.loginbean.UserBean;
 
 import android.util.Log;
 
@@ -31,22 +27,22 @@ import retrofit2.Response;
 /***
  * z注册的网络请求
  */
-public class ReginUserRepository {
+public class ReginUserRepository  {
     private static final String TAG = "reginuserRepository";
 
 
 
-    public  static  MutableLiveData<User> reginuser(String Userid, String password, String ps){
-        final MutableLiveData<User > data = new MutableLiveData<>();
+    public  static  MutableLiveData<ReginUser> reginuser(String Userid, String password, String ps){
         ApiServices apiServices = RetrofitServiceBuilder.createService(ApiServices.class);
-        final MutableLiveData<User> mutableLiveData = new MutableLiveData<>();
+        final MutableLiveData<ReginUser> mutableLiveData = new MutableLiveData<>();
         if (apiServices != null) {
             apiServices.regin(Userid, password)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new BaseSubscriber<User>() {
+                    .subscribe(new BaseSubscriber<ReginUser>() {
                         @Override
-                        public void onNext(User user) {
+                        public void onNext(ReginUser user)
+                        {
                             mutableLiveData.setValue(user);
                         }
 
@@ -54,6 +50,10 @@ public class ReginUserRepository {
                         public void onError(Throwable e) {
 
                             Log.d(TAG, "onError: " + e.toString());
+                            ReginUser ru=new ReginUser();
+                            ru.setMsg(e.toString());
+
+                            mutableLiveData.setValue(ru);
                         }
                     });
         }
