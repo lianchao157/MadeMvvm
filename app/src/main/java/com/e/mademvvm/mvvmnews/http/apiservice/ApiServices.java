@@ -6,6 +6,7 @@ import com.e.mademvvm.mvvmnews.bean.Bean;
 import com.e.mademvvm.mvvmnews.bean.NewBean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.Reqbean;
 import com.e.mademvvm.mvvmnews.bean.loginbean.UserBean;
+import com.e.mademvvm.mvvmnews.bean.regin.ReginUser;
 
 import java.util.List;
 import java.util.Map;
@@ -29,12 +30,12 @@ public interface ApiServices {
     Observable<NewBean> getNews(@Query("type") String type, @Query("key") String key);
 
 
-
-//    多baseurl 测试
+    //    多baseurl 测试
     @Headers("urlname:test1")
     @GET("地址1")
-    Observable<BaseResponse > getHData(@QueryMap Map<String, String> map);
-//    多baseurl 测试
+    Observable<BaseResponse> getHData(@QueryMap Map<String, String> map);
+
+    //    多baseurl 测试
     @Headers("urlname:test2")
     @GET("地址2")
     Observable<BaseResponse> getJData(@QueryMap Map<String, String> map);
@@ -53,6 +54,6 @@ public interface ApiServices {
      * @param key
      * @return
      */
-    @POST ("api/regin")
-    Observable<UserBean> regin(@Query("userid")String userid, @Query("usertel") String key);
+    @POST("api/regin")
+    Observable<ReginUser> regin(@Query("userid") String userid, @Query("usertel") String usertel);
 }
