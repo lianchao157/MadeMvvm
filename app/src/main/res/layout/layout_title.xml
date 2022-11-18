@@ -32,15 +32,6 @@
             android:paddingLeft="8dip" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:maxLength="10"
-        android:maxLines="1" />
-
     <LinearLayout
         android:id="@+id/layout_right"
         android:layout_width="wrap_content"
@@ -50,17 +41,26 @@
         android:paddingLeft="8dip"
         android:paddingRight="8dip">
 
-        <TextView
-            android:id="@+id/tv_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1" />
-
         <ImageView
             android:id="@+id/iv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:maxLength="10"
+        android:maxLines="1" />
 </RelativeLayout>
