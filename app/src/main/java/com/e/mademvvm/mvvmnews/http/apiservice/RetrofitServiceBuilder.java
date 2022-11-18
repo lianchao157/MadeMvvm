@@ -20,6 +20,7 @@ import   com.e.mademvvm.BaseApplication;
 public  class RetrofitServiceBuilder {
     private  static Context mContext;
     private static OkHttpClient client;
+//    HttpLoggingInterceptor interceptor;
 
 
     /***
@@ -30,17 +31,23 @@ public  class RetrofitServiceBuilder {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-
-                System.out.println("信息"+message);
                 System.out.println("信息!!!!!!!!"+message);
+               CreateData(message);
+//              new ErrotMessageOnclick() {
+//                    @Override
+//                    public String ErrorMessage() {
+//                        return message;
+//                    }
+//
+//                };
             }
         });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .addInterceptor(interceptor).connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .writeTimeout(60, TimeUnit.SECONDS)
+                .addInterceptor(interceptor).connectTimeout(3, TimeUnit.SECONDS)
+                .readTimeout(3, TimeUnit.SECONDS)
+                .writeTimeout(3, TimeUnit.SECONDS)
                 .addInterceptor(interceptor);
 
         client = builder.build();
@@ -64,4 +71,18 @@ public  class RetrofitServiceBuilder {
 
 
     }
+
+    public static void CreateData(String message) {
+        System.out.println("!!!!!!!!!!ffffffffffffffff"+message);
+    }
+
+
+//    public
+//      interface ErrotMessageOnclick {
+//        public abstract String ErrorMessage();
+
+//        public abstract String SetMeeage();
+//    }
+
+
 }
