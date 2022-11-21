@@ -19,7 +19,7 @@ https://www.jianshu.com/p/aa499cc64f72
 mvp
 https://github.com/KunMinX/Jetpack-MVVM-Best-Practice
 
-
+项目地址
 https://github.com/KunMinX/Jetpack-MVVM-Best-Practice/tree/master/app
 、
 
@@ -291,7 +291,54 @@ builder 初始化和set方法
   https://github.com/songbaba/RxJavaRetrofitOkhttpMvp-master/tree/master/app/src/main/java/com/example/gs/mvpdemo/base
   
   
-  
-  sql  查询的应用
-  https://blog.csdn.net/huzecom/article/details/103254074?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-1-103254074-blog-121772040.pc_relevant_3mothn_strategy_and_data_recovery&spm=1001.2101.3001.4242.2&utm_relevant_index=4
-  
+
+ 
+ 2022.11.4
+ 多个baseur 加载
+ https://blog.csdn.net/liuxiaopang520/article/details/122483559 
+ 
+ 
+  @Get , @Post 这些标注到每个接口方法上的注解不仅可以传相对路径,还可以传全路径,这样我们就可以做到不同的接口使用不同的 BaseUrl ,从而达到使用多个 BaseUrl 的需求,但是注解上的值只能是 Final 的常量,不能动态改变
+ 
+ 作者：浮名虚誉架构师
+ 链接：https://www.jianshu.com/p/4a5500782d8d
+ 来源：简书
+ 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ 有四种方案进行替换baseurl
+ 这里使用google 推荐
+ https://www.jianshu.com/p/4268e434150a/
+ 
+ 
+ 
+ <scut.carson_ho.diy_view.SuperEditText
+     android:layout_width="200dp"
+     android:layout_height="wrap_content"
+     // 设置左侧图标
+     app:ic_left_click="@drawable/ic_left_click"
+     app:ic_left_unclick="@drawable/ic_left_unclick"
+     app:left_x="0"
+     app:left_y="0"
+     app:left_width="60"
+     app:left_height="60"
+ 
+     // 设置删除图标
+     app:ic_delete="@drawable/delete"
+     app:delete_x="0"
+     app:delete_y="0"
+     app:delete_width="80"
+     app:delete_height="80"
+ 
+     // 设置分割线
+     app:lineColor_click="@color/colorfocus"
+     app:lineColor_unclick="@color/colorDeafult"
+     app:linePosition="1"
+ 
+     // 设置光标
+     app:cursor="@drawable/cursortest"
+ 
+     />
+ 
+ 
+ 这位 博主的git  有mvvm 和flutter
+ https://www.jianshu.com/p/0a405040ad6d
+ 
