@@ -1,4 +1,4 @@
-package com.e.mademvvm.mvvmnews.ui.regin;
+package com.e.mademvvm.mvvmnews.ui.videolist;
 
 //import com.e.createmcvp.mvvmnews.bean.BaseReqData;
 //import com.e.createmcvp.mvvmnews.bean.loginbean.Reqbean;
@@ -23,7 +23,7 @@ import androidx.lifecycle.ViewModel;
 /***
  * 登陆的view modlel
  */
-public class ReginViewModel extends ViewModel {
+public class VideoListModel extends ViewModel {
 
     public List<Reqbean> getmList() {
         return mList;
@@ -103,8 +103,6 @@ public class ReginViewModel extends ViewModel {
         public LiveData<ReginUser> apply(User input) {
             String  usernno=input.getUsernaem();
             String   ps=input.getPs();
-            System.out.println("提交数据：：：："+usernno+ps);
-
             return  ReginUserRepository.reginuser(usernno,ps,"input.getPs()");
         }
 
